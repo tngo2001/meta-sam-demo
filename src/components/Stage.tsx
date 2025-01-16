@@ -8,7 +8,6 @@ import React, {
 } from "react";
 import * as _ from "underscore";
 import Canvas from "./Canvas";
-import FeatureSummary from "./FeatureSummary";
 import {
   AnnotationProps,
   modelInputProps,
@@ -636,22 +635,6 @@ const Stage = ({
                 isHoverToolTip={[isHoverToolTip, setIsHoverToolTip]}
                 allText={[allText, setAllText]}
               />
-              <div
-                className={`absolute top-0 right-0 bottom-0 left-0 bg-opacity-70 bg-black flex items-center justify-center text-white text-lg font-bold transition-opacity ${
-                  shouldShowHomepageOverlay
-                    ? "opacity-100"
-                    : "opacity-0 pointer-events-none"
-                }`}
-                id="canvas-overlay"
-              >
-                <FeatureSummary
-                  actions={[{ action: "Demo", actionUrl: "/demo" }]}
-                  darkMode
-                  centerAlign
-                >
-                  <h3>Want to keep going?</h3>
-                </FeatureSummary>
-              </div>
             </div>
           )}
         </>

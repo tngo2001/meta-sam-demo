@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Video from "./Video";
+import React from "react";
 
 export type ContentProps = {
   color?:
@@ -45,9 +44,7 @@ export default function Content({
   noteLeft,
   noteRight,
   imageLeft,
-  videoLeft,
   imageRight,
-  videoRight,
   spaceTop,
   spaceBottom,
   small,
@@ -72,31 +69,18 @@ export default function Content({
         className={`flex flex-1 flex-col md:flex-row box-border max-w-screen-xl items-center justify-start px-5 md:px-20 xl:px-10 ${padTop} ${padBottom}`}
         style={style}
       >
-        {(imageLeft || videoLeft || noteLeft) && (
+        {(imageLeft || noteLeft) && (
           <div
             className="flex-1 flex-col mr-4 pt-2 items-start justify-start h-full text-sm"
             style={style}
           >
-            {!videoLeft && imageLeft && (
+            {imageLeft && (
               <div className="aspect-w-4 aspect-h-4">
                 <img
                   src={imageLeft}
                   alt={noteLeft || ""}
                   className="object-contain"
                   style={style}
-                />
-              </div>
-            )}
-            {videoLeft && (
-              <div className="aspect-w-4 aspect-h-4">
-                <Video
-                  url={videoLeft}
-                  autoPlay
-                  loop
-                  muted
-                  poster={imageLeft || undefined}
-                  controls={false}
-                  aspectRatio="fill"
                 />
               </div>
             )}
@@ -122,25 +106,12 @@ export default function Content({
               reorderForMobile ? "order-first md:order-none" : ""
             }`}
           >
-            {!videoRight && imageRight && (
+            {imageRight && (
               <div className="aspect-auto">
                 <img
                   src={imageRight}
                   alt={noteRight || ""}
                   className="object-contain mb-2 mt-2"
-                />
-              </div>
-            )}
-            {videoRight && (
-              <div className="aspect-w-4 aspect-h-4">
-                <Video
-                  url={videoRight}
-                  autoPlay
-                  loop
-                  muted
-                  poster={imageRight || undefined}
-                  controls={false}
-                  aspectRatio="fill"
                 />
               </div>
             )}

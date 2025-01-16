@@ -136,19 +136,6 @@ const SegmentDrawer = ({
                   Upload
                 </span>
               </button>
-              <button
-                className="flex"
-                onClick={() => {
-                  setIsToolBarUpload(false);
-                  setShowGallery(false);
-                  setIsCutOut(false);
-                  setDidShowAMGAnimation(false);
-                  handleResetState();
-                }}
-              >
-                <img src="assets/icn-image-gallery.svg" className="w-5 mr-1" />
-                <span className="text-sm">Gallery</span>
-              </button>
             </div>
           )}
           <div
