@@ -89,4 +89,3 @@ const DETECTRON2_COLORS = [
   })();
   
   export default colors;
-  

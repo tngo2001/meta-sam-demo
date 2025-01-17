@@ -20,18 +20,12 @@ import {
 } from "./components/helpers/modelAPI";
 import AppContext from "./components/hooks/createContext";
 import Stage from "./components/Stage";
-// import CookieText from "./CookieText";
 
-// console.log("hi")
-// Onnxruntime
 ort.env.debug = false;
-// set global logging level
 ort.env.logLevel = 'verbose';
-
-// override path of wasm files - for each file
 ort.env.wasm.numThreads = 2;
 ort.env.wasm.simd = true;
-// ort.env.wasm.proxy = true;
+
 ort.env.wasm.wasmPaths = {
   'ort-wasm.wasm': '/ort-wasm.wasm',
   'ort-wasm-simd.wasm': '/ort-wasm-simd.wasm',
@@ -39,32 +33,30 @@ ort.env.wasm.wasmPaths = {
   'ort-wasm-simd-threaded.wasm': '/ort-wasm-simd-threaded.wasm'
 };
 
-// ort.env.webgl.pack = true;
-
 const App = () => {
   const {
-    click: [click, setClick],
+    click: [, setClick],
     clicks: [clicks, setClicks],
     image: [image, setImage],
     prevImage: [prevImage, setPrevImage],
     svg: [, setSVG],
-    svgs: [svgs, setSVGs],
+    svgs: [, setSVGs],
     allsvg: [, setAllsvg],
     isErased: [, setIsErased],
     isModelLoaded: [, setIsModelLoaded],
     isLoading: [, setIsLoading],
     segmentTypes: [, setSegmentTypes],
     maskImg: [, setMaskImg],
-    isErasing: [isErasing, setIsErasing],
-    stickerTabBool: [stickerTabBool, setStickerTabBool],
+    isErasing: [, setIsErasing],
+    stickerTabBool: [stickerTabBool],
     isMultiMaskMode: [isMultiMaskMode, setIsMultiMaskMode],
-    isHovering: [isHovering, setIsHovering],
-    showLoadingModal: [showLoadingModal, setShowLoadingModal],
-    eraserText: [eraserText, setEraserText],
+    isHovering: [, setIsHovering],
+    showLoadingModal: [, setShowLoadingModal],
+    eraserText: [, setEraserText],
     predMask: [predMask, setPredMask],
     predMasks: [predMasks, setPredMasks],
-    predMasksHistory: [predMasksHistory, setPredMasksHistory],
-    isToolBarUpload: [isToolBarUpload, setIsToolBarUpload],
+    predMasksHistory: [predMasksHistory],
+    isToolBarUpload: [, setIsToolBarUpload],
   } = useContext(AppContext)!;
   const [model, setModel] = useState<InferenceSession | null>(null);
   const [multiMaskModel, setMultiMaskModel] = useState<InferenceSession | null>(
@@ -88,40 +80,22 @@ const App = () => {
   >(null);
   const [modelScale, setModelScale] = useState<modelScaleProps | null>(null);
 
-  // useEffect(() => {
-  //   // Preload images
-  //   for (const photo of photos) {
-  //     const img = new Image();
-  //     img.src = photo.src;
-  //   }
-  // }, []);
-
-  // console.log("WHY IS THIS NOT RUNNING?")
   useEffect(() => {
     const initModel = async () => {
       try {
-        // if (process.env.MODEL_DIR === undefined) return;
         const MODEL_DIR = "./interactive_module_quantized_592547_2023_03_19_sam6_long_uncertain.onnx";
         const URL: string = MODEL_DIR;
-        // const URL: string = process.env.MODEL_DIR;
         const model = await InferenceSession.create(URL);
         setModel(model);
       } catch (e) {
-        // console.log("MODEL:", e);
         console.error(e);
       }
       try {
-        // console.log("MULTI MASK MODEL");
-        // if (process.env.MULTI_MASK_MODEL_DIR === undefined) return;
         const MULTI_MASK_MODEL_DIR = "./interactive_module_quantized_592547_2023_03_20_sam6_long_all_masks_extra_data_with_ious.onnx";
         const URL2: string = MULTI_MASK_MODEL_DIR;
-        // console.log("MULTI MASK MODEL URL:", URL2);
-        // const URL2: string = process.env.MULTI_MASK_MODEL_DIR;
         const multiMaskModel = await InferenceSession.create(URL2);
-        // console.log("multiMaskModel:", multiMaskModel);
         setMultiMaskModel(multiMaskModel);
       } catch (e) {
-        // console.log("MULTI MASK MODEL:", e);
         console.error(e);
       }
     };
@@ -146,7 +120,6 @@ const App = () => {
         last_pred_mask: null, // Only 1 click allowed, so no last predicted mask exists
       });
       if (feeds === undefined) return;
-      // console.log("Running multiMaskModel");
       const results = await multiMaskModel.run(feeds);
 
       const output = results["output"];
@@ -221,9 +194,8 @@ const App = () => {
       setIsModelLoaded((prev) => {
         return { ...prev, boxModel: true };
       });
-      // console.log("multiMaskModel is loaded");
     } catch (e) {
-      // console.log(e);
+      console.log(e);
     }
   };
 
@@ -242,7 +214,6 @@ const App = () => {
   };
 
   const runModel = async () => {
-    // console.log("Running singleMaskModel");
     try {
       if (
         model === null ||
@@ -259,13 +230,9 @@ const App = () => {
         last_pred_mask: predMask,
       });
       if (feeds === undefined) return;
-      // const beforeONNX = Date.now();
       const results = await model.run(feeds);
-      // const afterONNX = Date.now();
-      // console.log(`ONNX took ${afterONNX - beforeONNX}ms`);
       const output = results[model.outputNames[0]];
       if (hasClicked) {
-        // const beforeSVG = Date.now();
         const pred_mask = results[model.outputNames[1]];
         setPredMask(pred_mask);
         if (!predMasksHistory) {
@@ -278,27 +245,20 @@ const App = () => {
         );
         setSVG(svgStr);
         setMask(output.data);
-        // const afterSVG = Date.now();
-        // console.log(`SVG took ${afterSVG - beforeSVG}ms`);
       } else {
-        // const beforeMask = Date.now();
         setMaskImg(rleToImage(output.data, output.dims[0], output.dims[1]));
-        // const afterMask = Date.now();
-        // console.log(`Mask took ${afterMask - beforeMask}ms`);
       }
       setClick(null);
       setIsLoading(false);
       setIsModelLoaded((prev) => {
         return { ...prev, boxModel: true };
       });
-      // console.log("boxModel is loaded");
     } catch (e) {
-      // console.log(e);
+      console.log(e);
     }
   };
 
   useEffect(() => {
-    // TODO: By default use the runModel function
     // When the multi mask mode is enabled, run runMultiMaskModel
     const runOnnx = async () => {
       if (isMultiMaskMode) {
@@ -318,7 +278,6 @@ const App = () => {
     if (image !== null) {
       setIsErased(true);
       setIsErasing(true);
-      // setIsLoading(true);
       setEraserText({ isErase: true, isEmbedding: false });
       const { height, width, uploadScale } = handleImageScale(image);
       setParmsandQueryEraseModel({
@@ -385,13 +344,11 @@ const App = () => {
       const shouldNotFetchAllModel = options?.shouldNotFetchAllModel;
       const shouldDownload = options?.shouldDownload;
       handleResetState();
-      // setIsLoading(true);
       setShowLoadingModal(true);
       let imgName: string = "";
       if (data instanceof URL) {
         imgName = data.pathname;
       } else if (data instanceof String) {
-        // TODO: find the right place where to replace it...
         data = new URL(data.replace('/assets/', '/public/assets/'));
         imgName = data.pathname;
       }
@@ -433,19 +390,12 @@ const App = () => {
     }
   };
 
-  // useEffect(() => {
-  //   // redirect after handleSelectedImage runs
-  //   if (image) navigate("/playground");
-  // }, [image]);
-
   const handleSegModelResults = ({ tensor }: { tensor: Tensor }) => {
-    // console.log("handleSegModelResults");
     setTensor(tensor);
     setIsLoading(false);
     setIsErasing(false);
     setShowLoadingModal(false);
     setEraserText({ isErase: false, isEmbedding: false });
-    // window.scrollTo(0, 0);
   };
 
   const handleAllModelResults = ({
@@ -462,7 +412,6 @@ const App = () => {
     }[];
     image_height: number;
   }) => {
-    // console.log("handleAllModelResults");
     const allMaskSVG = allJSON.map(
       (el: {
         encodedMask: string;

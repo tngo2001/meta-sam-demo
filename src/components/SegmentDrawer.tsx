@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { getCookieConsentValue } from "react-cookie-consent";
 import { useDropzone } from "react-dropzone";
 import * as ReactGA from "react-ga4";
@@ -29,7 +29,6 @@ interface SegmentDrawerProps {
 }
 
 const SegmentDrawer = ({
-  handleResetState,
   handleResetInteraction,
   handleUndoInteraction,
   handleRedoInteraction,
@@ -38,21 +37,21 @@ const SegmentDrawer = ({
   handleImage,
   handleMultiMaskMode,
   userNegClickBool: [userNegClickBool, setUserNegClickBool],
-  showGallery: [showGallery, setShowGallery],
+  showGallery: [, setShowGallery],
   hasClicked,
   handleSelectedImage,
 }: SegmentDrawerProps) => {
   const {
-    isModelLoaded: [isModelLoaded, setIsModelLoaded],
+    isModelLoaded: [isModelLoaded],
     segmentTypes: [segmentTypes, setSegmentTypes],
-    isLoading: [isLoading, setIsLoading],
-    isErased: [isErased, setIsErased],
-    isMultiMaskMode: [isMultiMaskMode, setIsMultiMaskMode],
-    stickers: [stickers, setStickers],
+    isLoading: [isLoading],
+    isErased: [isErased],
+    isMultiMaskMode: [, setIsMultiMaskMode],
+    stickers: [stickers],
     activeSticker: [activeSticker, setActiveSticker],
-    didShowAMGAnimation: [didShowAMGAnimation, setDidShowAMGAnimation],
+    didShowAMGAnimation: [, setDidShowAMGAnimation],
     isAllAnimationDone: [isAllAnimationDone, setIsAllAnimationDone],
-    isToolBarUpload: [isToolBarUpload, setIsToolBarUpload],
+    isToolBarUpload: [, setIsToolBarUpload],
   } = useContext(AppContext)!;
 
   const [uploadClick, setUploadClick] = useState<boolean>(true);
@@ -65,7 +64,7 @@ const SegmentDrawer = ({
   const handleStickerClick = (i: number) => {
     setActiveSticker(i);
   };
-  const [error, setError] = useState<string>("");
+  const [, setError] = useState<string>("");
   const [isClickCollapsed, setIsClickCollapsed] = useState(true);
   const [isBoxCollapsed, setIsBoxCollapsed] = useState(true);
   const [isAllCollapsed, setIsAllCollapsed] = useState(true);
@@ -78,11 +77,6 @@ const SegmentDrawer = ({
     boxTimeout: string | number | NodeJS.Timeout | undefined,
     allTimeout: string | number | NodeJS.Timeout | undefined,
     cutOutTimeout: string | number | NodeJS.Timeout | undefined;
-
-  // setIsClickMounted(false)
-  // setIsBoxMounted(false)
-  // setIsAllMounted(false)
-  // setIsCutOutMounted(false)
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -172,7 +166,6 @@ const SegmentDrawer = ({
               setIsBoxCollapsed(true);
               setIsAllCollapsed(true);
               setIsCutOutCollapsed(true);
-              // setVisibleClickHover(false);
               clearTimeout(clickTimeout);
               setIsClickMounted(false);
               setIsBoxMounted(false);
@@ -313,7 +306,6 @@ const SegmentDrawer = ({
               setIsBoxCollapsed(true);
               setIsAllCollapsed(true);
               setIsCutOutCollapsed(true);
-              // setVisibleBoxHover(false);
               clearTimeout(boxTimeout);
               setIsClickMounted(false);
               setIsBoxMounted(false);
@@ -458,7 +450,6 @@ const SegmentDrawer = ({
               setIsBoxCollapsed(true);
               setIsAllCollapsed(true);
               setIsCutOutCollapsed(true);
-              // setVisibleAllHover(false);
               clearTimeout(allTimeout);
               setIsClickMounted(false);
               setIsBoxMounted(false);
@@ -547,7 +538,6 @@ const SegmentDrawer = ({
               setIsAllCollapsed(true);
               setIsCutOutCollapsed(true);
               clearTimeout(cutOutTimeout);
-              // setVisibleStickerHover(false);
               setIsClickMounted(false);
               setIsBoxMounted(false);
               setIsAllMounted(false);

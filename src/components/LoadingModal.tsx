@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import AppContext from "./hooks/createContext";
 
 interface LoadingModalProps {
@@ -7,10 +7,10 @@ interface LoadingModalProps {
 
 const LoadingModal = ({ handleResetState }: LoadingModalProps) => {
   const {
-    showLoadingModal: [showLoadingModal, setShowLoadingModal],
-    image: [image, setImage],
-    isErasing: [isErasing, setIsErasing],
-    eraserText: [eraserText, setEraserText],
+    showLoadingModal: [showLoadingModal],
+    image: [image],
+    isErasing: [isErasing],
+    eraserText: [eraserText],
   } = useContext(AppContext)!;
 
   console.log("Loading modal");

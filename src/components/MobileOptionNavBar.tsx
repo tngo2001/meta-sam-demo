@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import AppContext from "./hooks/createContext";
 
 interface MobileOptionNavBarProps {
@@ -19,16 +19,16 @@ const MobileOptionNavBar = ({
   handleResetState,
   handleUndoInteraction,
   handleImage,
-  userNegClickBool: [userNegClickBool, setUserNegClickBool],
+  userNegClickBool: [, setUserNegClickBool],
 }: MobileOptionNavBarProps) => {
   const {
-    svg: [svg, setSVG],
-    clicksHistory: [clicksHistory, setClicksHistory],
+    svg: [svg],
+    clicksHistory: [clicksHistory],
     segmentTypes: [segmentTypes, setSegmentTypes],
     isErased: [isErased, setIsErased],
     isLoading: [, setIsLoading],
   } = useContext(AppContext)!;
-  const [hasTouchedUpload, setHasTouchedUpload] = useState<Boolean>(false);
+  const [, setHasTouchedUpload] = useState<Boolean>(false);
   return (
     <div className="flex justify-between w-full p-2 md:hidden">
       <div>

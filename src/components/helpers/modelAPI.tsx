@@ -12,8 +12,6 @@ import {
 
 const API_ENDPOINT          = "https://model-zoo.metademolab.com/predictions/segment_everything_box_model";
 const ALL_MASK_API_ENDPOINT = "https://model-zoo.metademolab.com/predictions/automatic_masks";
-//const API_ENDPOINT = process.env.API_ENDPOINT;
-//const ALL_MASK_API_ENDPOINT = process.env.ALL_MASK_API_ENDPOINT;
 const ERASE_API_ENDPOINT = process.env.ERASE_API_ENDPOINT;
 
 const setParmsandQueryModel = ({
@@ -27,14 +25,12 @@ const setParmsandQueryModel = ({
   shouldDownload,
   shouldNotFetchAllModel,
 }: setParmsandQueryModelProps) => {
-  // console.log("setParmsandQueryModel");
   const canvas = document.createElement("canvas");
   canvas.width = Math.round(width * uploadScale);
   canvas.height = Math.round(height * uploadScale);
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
   ctx.drawImage(imgData, 0, 0, canvas.width, canvas.height);
-  // console.log("plot uploaded image");
   canvas.toBlob(
     (blob) => {
       blob &&
@@ -63,11 +59,8 @@ const queryModelReturnTensors = async ({
   shouldNotFetchAllModel,
 }: queryModelReturnTensorsProps) => {
 
-  // console.log("image_height, imgName, shouldDownload, shouldNotFetchAllModel:", image_height, imgName, shouldDownload, shouldNotFetchAllModel)
-  // console.log("pre-queryModelReturnTensors");
   if (!API_ENDPOINT) return;
   if (!ALL_MASK_API_ENDPOINT) return;
-  // console.log("post-queryModelReturnTensors");
   const segRequest =
     imgName && !shouldDownload
       ? fetch(`/assets/gallery/${imgName}.txt`)
@@ -156,7 +149,6 @@ const setParmsandQueryEraseModel = ({
   mask,
   handlePredictedImage,
 }: setParmsandQueryEraseModelProps) => {
-  // console.log("Querying erase model");
   const canvas = document.createElement("canvas");
   canvas.width = Math.round(width * uploadScale);
   canvas.height = Math.round(height * uploadScale);
@@ -216,19 +208,6 @@ const modelData = ({
   let pointLabels;
   let pointCoordsTensor;
   let pointLabelsTensor;
-  // point_coords, point_labels params below are only truthy in text model
-  // if (point_coords && point_labels) {
-  //   pointCoords = new Float32Array(4);
-  //   pointLabels = new Float32Array(2);
-  //   pointCoords[0] = point_coords[0][0];
-  //   pointCoords[1] = point_coords[0][1];
-  //   pointLabels[0] = point_labels[0]; // UPPER_LEFT
-  //   pointCoords[2] = point_coords[1][0];
-  //   pointCoords[3] = point_coords[1][1];
-  //   pointLabels[1] = point_labels[1]; // BOTTOM_RIGHT
-  //   pointCoordsTensor = new Tensor("float32", pointCoords, [1, 2, 2]);
-  //   pointLabelsTensor = new Tensor("float32", pointLabels, [1, 2]);
-  // }
   // point click model check
   if (clicks) {
     let n = clicks.length;

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button } from "react-daisyui";
 import { useSwipeable } from "react-swipeable";
 import AppContext from "./hooks/createContext";
@@ -16,25 +16,21 @@ interface MobileSegmentDrawerProps {
 
 const MobileSegmentDrawer = ({
   handleResetInteraction,
-  handleMagicErase,
   handleCreateSticker,
   userNegClickBool: [userNegClickBool, setUserNegClickBool],
 }: MobileSegmentDrawerProps) => {
   const {
     segmentTypes: [segmentTypes, setSegmentTypes],
-    svg: [svg, setSVG],
-    stickers: [stickers, setStickers],
+    svg: [svg],
+    stickers: [stickers],
     activeSticker: [activeSticker, setActiveSticker],
-    isModelLoaded: [isModelLoaded, setIsModelLoaded],
-    click: [click, setClick],
-    clicks: [clicks, setClicks],
+    isModelLoaded: [isModelLoaded],
+    click: [click],
+    clicks: [clicks],
     stickerTabBool: [stickerTabBool, setStickerTabBool],
-    allsvg: [allsvg, setAllsvg],
-    didShowAMGAnimation: [didShowAMGAnimation, setDidShowAMGAnimation],
-    showLoadingModal: [showLoadingModal, setShowLoadingModal],
+    didShowAMGAnimation: [, setDidShowAMGAnimation],
   } = useContext(AppContext)!;
   const [everythingBool, setEverythingBool] = useState<Boolean>(false);
-  const [hasTouchedErase, sethasTouchedErase] = useState<Boolean>(false);
 
   useEffect(() => {
     setEverythingBool(segmentTypes === "All");
@@ -156,49 +152,6 @@ const MobileSegmentDrawer = ({
               </span>
             </a>
           </li>
-          {/* <li>
-          <a
-            className={`flex flex-col items-center pt-2 ${!svg && "disabled"}`}
-            onClick={() => {
-              setDidShowAMGAnimation(false);
-              handleMagicErase();
-              setStickerTabBool(() => false);
-              setShowLoadingModal(true);
-            }}
-            onTouchStart={() => sethasTouchedErase(true)}
-            onTouchEnd={() => sethasTouchedErase(false)}
-          >
-            <svg
-              className="w-5 m-1"
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M4.03809 8.59341L8.45669 13.012L6.53991 14.9288C6.14938 15.3193 5.51622 15.3193 5.12569 14.9288L2.1213 11.9244C1.73078 11.5339 1.73078 10.9007 2.1213 10.5102L4.03809 8.59341Z"
-                fill={hasTouchedErase ? "#1D4AB2" : "#344854"}
-                strokeWidth="2"
-              />
-              <path
-                d="M10.3203 1.41421L15.6363 6.73018L9.34113 13.0253L4.02517 7.70936L10.3203 1.41421Z"
-                fill={hasTouchedErase ? "#1D4AB2" : "#344854"}
-                strokeWidth="2"
-              />
-              <rect
-                x="5.71484"
-                y="15"
-                width="14.2855"
-                height="1.42855"
-                fill={hasTouchedErase ? "#1D4AB2" : "#344854"}
-              />
-            </svg>
-            <span className={hasTouchedErase ? "text-blue-700" : "#fff"}>
-              Erase
-            </span>
-          </a>
-        </li> */}
           <li>
             <a
               className="flex flex-col items-center pt-2"

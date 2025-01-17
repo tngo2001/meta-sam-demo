@@ -55,17 +55,17 @@ const Canvas = ({
   hasClicked,
   setCanvasScale,
   isStandalone,
-  isHoverToolTip: [isHoverToolTip, setIsHoverToolTip],
-  allText: [allText, setAllText],
+  isHoverToolTip: [, setIsHoverToolTip],
+  allText: [, setAllText],
 }: CanvasProps) => {
   const {
-    click: [click, setClick],
+    click: [click],
     clicks: [clicks, setClicks],
     image: [image],
     svg: [svg],
     svgs: [svgs],
     allsvg: [allsvg],
-    segmentTypes: [segmentTypes, setSegmentTypes],
+    segmentTypes: [segmentTypes],
     isErased: [isErased],
     isErasing: [isErasing],
     isLoading: [isLoading, setIsLoading],
@@ -73,11 +73,11 @@ const Canvas = ({
     canvasHeight: [, setCanvasHeight],
     maskImg: [maskImg],
     stickerTabBool: [stickerTabBool, setStickerTabBool],
-    isModelLoaded: [isModelLoaded, setIsModelLoaded],
-    isMultiMaskMode: [isMultiMaskMode, setIsMultiMaskMode],
+    isModelLoaded: [isModelLoaded],
+    isMultiMaskMode: [isMultiMaskMode],
     isHovering: [isHovering, setIsHovering],
     didShowAMGAnimation: [didShowAMGAnimation, setDidShowAMGAnimation],
-    isAllAnimationDone: [isAllAnimationDone, setIsAllAnimationDone],
+    isAllAnimationDone: [, setIsAllAnimationDone],
   } = useContext(AppContext)!;
   if (!image) return null;
 

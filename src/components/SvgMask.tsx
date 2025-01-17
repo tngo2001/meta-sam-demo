@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import AppContext from "./hooks/createContext";
 
 interface SvgMaskProps {
@@ -17,14 +17,12 @@ const SvgMask = ({
   className = "",
 }: SvgMaskProps) => {
   const {
-    click: [click, setClick],
+    click: [click],
     image: [image],
-    isLoading: [isLoading, setIsLoading],
-    canvasWidth: [, setCanvasWidth],
-    canvasHeight: [, setCanvasHeight],
-    isErasing: [isErasing, setIsErasing],
+    isLoading: [isLoading],
+    isErasing: [isErasing],
     svg: [svg],
-    isMultiMaskMode: [isMultiMaskMode, setIsMultiMaskMode],
+    isMultiMaskMode: [isMultiMaskMode],
   } = useContext(AppContext)!;
   const [key, setKey] = useState(Math.random());
   const [boundingBox, setBoundingBox] = useState<DOMRect | undefined>(

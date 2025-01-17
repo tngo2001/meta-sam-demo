@@ -341,4 +341,3 @@ const splitPointKey = (point: string) => {
   
     return svgStrings;
   };
-  

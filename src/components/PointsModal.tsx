@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 
 const PointsModal = () => {
   const [toggle, setToggle] = React.useState(true);
-  const [cookies, setCookie, removeCookie] = useCookies(["sa-mask-info"]);
+  const [cookies, setCookie] = useCookies(["sa-mask-info"]);
 
   if (cookies["sa-mask-info"]) return null;
 

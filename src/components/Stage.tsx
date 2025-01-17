@@ -37,28 +37,28 @@ const Stage = ({
   model,
 }: StageProps) => {
   const {
-    click: [click, setClick],
+    click: [, setClick],
     clicks: [clicks, setClicks],
     clicksHistory: [clicksHistory, setClicksHistory],
-    svg: [svg, setSVG],
+    svg: [, setSVG],
     stickers: [stickers, setStickers],
-    segmentTypes: [segmentTypes, setSegmentTypes],
-    isErased: [isErased, setIsErased],
-    canvasHeight: [canvasHeight, setCanvasHeight],
+    segmentTypes: [segmentTypes],
+    isErased: [, setIsErased],
+    canvasHeight: [canvasHeight],
     maskImg: [, setMaskImg],
     userNegClickBool: [userNegClickBool, setUserNegClickBool],
-    activeSticker: [activeSticker, setActiveSticker],
-    isLoading: [isLoading, setIsLoading],
-    hasNegClicked: [hasNegClicked, setHasNegClicked],
-    stickerTabBool: [stickerTabBool, setStickerTabBool],
+    activeSticker: [, setActiveSticker],
+    isLoading: [, setIsLoading],
+    hasNegClicked: [, setHasNegClicked],
+    stickerTabBool: [stickerTabBool],
     isMultiMaskMode: [isMultiMaskMode, setIsMultiMaskMode],
-    svgs: [svgs, setSVGs],
-    isHovering: [isHovering, setIsHovering],
-    showLoadingModal: [showLoadingModal, setShowLoadingModal],
-    predMask: [predMask, setPredMask],
+    svgs: [, setSVGs],
+    isHovering: [, setIsHovering],
+    showLoadingModal: [showLoadingModal],
+    predMask: [, setPredMask],
     predMasks: [predMasks, setPredMasks],
     predMasksHistory: [predMasksHistory, setPredMasksHistory],
-    isToolBarUpload: [isToolBarUpload, setIsToolBarUpload],
+    isToolBarUpload: [isToolBarUpload],
   } = useContext(AppContext)!;
   const [annotations, setAnnotations] = useState<Array<AnnotationProps>>([]);
   const [newAnnotation, setNewAnnotation] = useState<Array<AnnotationProps>>(
@@ -74,7 +74,7 @@ const Stage = ({
   const [points, setPoints] = useState<Points>();
   const [canvasScale, setCanvasScale] = useState<number>(1);
   const [homepageTimer, setHomepageTimer] = useState<any>();
-  const [shouldShowHomepageOverlay, setShouldShowHomepageOverlay] =
+  const [, setShouldShowHomepageOverlay] =
     useState(false);
   const DRAG_THRESHOLD = 4;
   const HOMEPAGE_IMAGE = "/assets/gallery/dogs-with-stick.jpg";
@@ -90,7 +90,6 @@ const Stage = ({
     if (isStandalone && model) {
       const url = new URL(HOMEPAGE_IMAGE, location.origin);
       handleSelectedImage(url, {
-        // shouldDownload: true,
         shouldNotFetchAllModel: true,
       });
     }
@@ -318,7 +317,6 @@ const Stage = ({
         break;
       default:
         break;
-        // return null;
     }
   };
 
@@ -693,7 +691,7 @@ const Stage = ({
                       commitTime, // when React committed this update
                       interactions
                     ) => {
-                      // console.log(`${id} took ${actualDuration}ms`);
+                      console.log(`${id} took ${actualDuration}ms`);
                     }}
                   >
                     <Canvas

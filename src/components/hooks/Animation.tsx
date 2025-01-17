@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 function useDelayUnmount(isMounted: boolean, delayTime: number) {
   const [showDiv, setShowDiv] = useState(false);
@@ -7,7 +7,7 @@ function useDelayUnmount(isMounted: boolean, delayTime: number) {
     if (isMounted && !showDiv) {
       setShowDiv(true);
     } else if (!isMounted && showDiv) {
-      timeoutId = setTimeout(() => setShowDiv(false), delayTime); //delay our unmount
+      timeoutId = setTimeout(() => setShowDiv(false), delayTime); // delay our unmount
     }
     return () => clearTimeout(timeoutId); // cleanup mechanism for effects , the use of setTimeout generate a sideEffect
   }, [isMounted, delayTime, showDiv]);
@@ -31,27 +31,3 @@ const Animate = ({ children, isMounted }: any) => {
 };
 
 export default Animate;
-
-// THE CSS:
-
-// @keyframes inAnimation {
-//     0% {
-//       opacity: 0;
-//       max-height: 0px;
-//     }
-//     100% {
-//       opacity: 1;
-//       max-height: 600px;
-//     }
-//   }
-
-//   @keyframes outAnimation {
-//     0% {
-//       opacity: 1;
-//       max-height: 600px;
-//     }
-//     100% {
-//       opacity: 0;
-//       max-height: 0px;
-//     }
-//   }

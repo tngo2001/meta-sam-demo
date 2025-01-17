@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import AppContext from "./hooks/createContext";
 
 interface SegmentOptionsProps {
@@ -18,25 +18,20 @@ const SegmentOptions = ({
   handleUndoInteraction,
   handleRedoInteraction,
   handleCreateSticker,
-  handleMagicErase,
   handleImage,
   hasClicked,
   isCutOut: [isCutOut, setIsCutOut],
   handleMultiMaskMode,
 }: SegmentOptionsProps) => {
   const {
-    isModelLoaded: [isModelLoaded, setIsModelLoaded],
     segmentTypes: [segmentTypes, setSegmentTypes],
-    isLoading: [isLoading, setIsLoading],
+    isLoading: [, setIsLoading],
     isErased: [isErased, setIsErased],
-    svg: [svg, setSVG],
-    clicksHistory: [clicksHistory, setClicksHistory],
-    image: [image],
-    isMultiMaskMode: [isMultiMaskMode, setIsMultiMaskMode],
-    svgs: [svgs, setSVGs],
-    clicks: [clicks, setClicks],
-    showLoadingModal: [showLoadingModal, setShowLoadingModal],
-    didShowAMGAnimation: [didShowAMGAnimation, setDidShowAMGAnimation],
+    svg: [svg],
+    clicksHistory: [clicksHistory],
+    isMultiMaskMode: [isMultiMaskMode],
+    svgs: [svgs],
+    didShowAMGAnimation: [, setDidShowAMGAnimation],
   } = useContext(AppContext)!;
   return (
     <>
@@ -141,18 +136,6 @@ const SegmentOptions = ({
             </span>
           </button>
         )}
-        {/* <button
-          className={`flex ${!svg && "disabled"} ${
-            segmentTypes === "All" && "hidden"
-          }`}
-          onClick={() => {
-            handleMagicErase();
-            setShowLoadingModal(true);
-          }}
-        >
-          <img src="assets/erase.svg" />
-          <span className="pl-2 opacity-70">Erase Object</span>
-        </button> */}
         <button
           className={`flex ${!svg && segmentTypes !== "All" && "disabled"} `}
           onClick={(e) => {

@@ -20,6 +20,5 @@ const handleImageScale = (data: HTMLImageElement) => {
     }
     return { height: h, width: w, scale, uploadScale };
   };
-  
+
   export { handleImageScale };
-  

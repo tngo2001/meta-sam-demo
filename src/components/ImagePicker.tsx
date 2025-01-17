@@ -9,7 +9,7 @@ export interface ImagePickerProps {
 }
 
 const ImagePicker = ({handleSelectedImage}: ImagePickerProps) => {
-  const [error, setError] = useState<string>("");
+  const [, setError] = useState<string>("");
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {

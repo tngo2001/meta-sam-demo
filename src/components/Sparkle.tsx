@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AppContext from "./hooks/createContext";
 
 const Sparkle = ({ isActive }: { isActive: Boolean }) => {
   const {
-    isModelLoaded: [isModelLoaded, setIsModelLoaded],
-    segmentTypes: [segmentTypes, setSegmentTypes],
+    isModelLoaded: [isModelLoaded],
+    segmentTypes: [segmentTypes],
   } = useContext(AppContext)!;
   const FILL = segmentTypes === "All" ? "#2962D9" : "#000";
   const [showStar1, setShowStar1] = useState<Boolean>(false);
