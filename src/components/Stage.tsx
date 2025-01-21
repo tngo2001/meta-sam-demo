@@ -186,7 +186,7 @@ const Stage = ({
 
     const isMobile = window.innerWidth < 768;
     const konvaClone = konvaRef.current.clone();
-    const svgLayer = konvaClone.findOne(".svgMask");
+    const svgLayer = konvaClone.findOne(".svgMask") as Konva.Layer;
     const pathNodes = svgLayer.find("Path");
     const imageNode = svgLayer.find("Image")[0];
     if (segmentTypes === "All") {
@@ -196,8 +196,8 @@ const Stage = ({
     }
     const newStickers: HTMLCanvasElement[] = [];
     let counter = 0;
-    konvaClone.findOne(".annotations").hide();
-    konvaClone.findOne(".animateAllSvg").hide();
+    konvaClone.findOne(".annotations")!.hide();
+    konvaClone.findOne(".animateAllSvg")!.hide();
     svgLayer.globalCompositeOperation("destination-atop");
     imageNode.opacity(-1);
     imageNode.remove();
@@ -206,8 +206,8 @@ const Stage = ({
     }
     for (const pathNode of pathNodes) {
       counter++;
-      svgLayer.add(imageNode);
-      svgLayer.add(pathNode);
+      svgLayer.add(imageNode as Konva.Image);
+      svgLayer.add(pathNode as Konva.Path);
       const newSticker = cropImageFromCanvasTS(konvaClone);
       if (newSticker) newStickers.push(newSticker);
       imageNode.remove();

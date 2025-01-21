@@ -33,7 +33,7 @@ ort.env.wasm.wasmPaths = {
   'ort-wasm-simd-threaded.wasm': '/ort-wasm-simd-threaded.wasm'
 };
 
-const App = () => {
+const SegmentPage = () => {
   const {
     click: [, setClick],
     clicks: [clicks, setClicks],
@@ -459,9 +459,9 @@ const App = () => {
   return (
     <>
       <Routes>
-        <Route path="*" element={<Navigate replace to="/demo" />} />
+        <Route path="*" element={<Navigate replace to="" />} />
         <Route
-          path="/demo"
+          path=""
           element={
             <div className={`flex flex-col h-full overflow-hidden`}>
               <Stage
@@ -482,4 +482,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default SegmentPage;

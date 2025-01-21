@@ -172,10 +172,11 @@ const Canvas = ({
       allTimeouts.forEach((allTimeout) => clearTimeout(allTimeout));
       setAllTimeouts([]);
       if (konvaRef === null) return;
-      const animateAllSvg: Konva.Layer =
-        konvaRef!.current!.findOne(".animateAllSvg");
-      animateAllSvg.destroyChildren();
-      animateAllSvg.draw();
+      const animateAllSvg = konvaRef!.current!.findOne(".animateAllSvg") as Konva.Layer | undefined;
+      if (animateAllSvg) {
+        animateAllSvg.destroyChildren();
+        animateAllSvg.draw();
+      }
     }
   }, [segmentTypes]);
 
@@ -184,10 +185,9 @@ const Canvas = ({
     if (konvaRef === null) return;
     if (konvaRef.current === null) return;
     setIsAllAnimationDone(false);
-    const animateAllSvg: Konva.Layer =
-      konvaRef.current.findOne(".animateAllSvg");
-    animateAllSvg.find("Circle").forEach((el) => el.destroy());
-    animateAllSvg.find("Path").forEach((el) => el.destroy());
+    const animateAllSvg = konvaRef!.current!.findOne(".animateAllSvg") as Konva.Layer | undefined;
+    animateAllSvg!.find("Circle").forEach((el) => el.destroy());
+    animateAllSvg!.find("Path").forEach((el) => el.destroy());
     const width = canvasDimensions.width / 32;
     const height = canvasDimensions.height / 32;
     const minRadius = 1.5;
@@ -220,7 +220,7 @@ const Canvas = ({
               perfectDrawEnabled: false,
               opacity: 0,
             });
-            animateAllSvg.add(circle);
+            animateAllSvg!.add(circle);
             circle.to({
               opacity: 1,
               duration: 1,
@@ -270,9 +270,9 @@ const Canvas = ({
             preventDefault: false,
             perfectDrawEnabled: false,
           });
-          animateAllSvg.add(path);
-          animateAllSvg.add(circle);
-          animateAllSvg.draw();
+          animateAllSvg!.add(path);
+          animateAllSvg!.add(circle);
+          animateAllSvg!.draw();
           circle.to({
             duration: 1,
             radius: bigRadius,
