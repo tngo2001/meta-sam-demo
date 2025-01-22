@@ -126,7 +126,6 @@ const SegmentDrawer = ({
               >
                 <span {...getRootProps()} className="flex text-sm">
                   <input {...getInputProps()} />
-                  <img src="assets/upload_arrow.svg" className="w-5 mr-1" />
                   Upload
                 </span>
               </button>

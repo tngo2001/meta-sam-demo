@@ -2,7 +2,6 @@ import LZString from "lz-string";
 import { InferenceSession, Tensor } from "onnxruntime-web";
 import * as ort from 'onnxruntime-web';
 import { useContext, useEffect, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
 import getFile from "./components/helpers/getFile";
 import { handleImageScale } from "./components/helpers/ImageHelper";
 import { modelScaleProps } from "./components/helpers/Interface";
@@ -457,28 +456,18 @@ const SegmentPage = () => {
   };
 
   return (
-    <>
-      <Routes>
-        <Route path="*" element={<Navigate replace to="" />} />
-        <Route
-          path=""
-          element={
-            <div className={`flex flex-col h-full overflow-hidden`}>
-              <Stage
-                scale={modelScale}
-                handleResetState={handleResetState}
-                handleMagicErase={handleMagicErase}
-                handleImage={handleImage}
-                hasClicked={hasClicked}
-                setHasClicked={setHasClicked}
-                handleSelectedImage={handleSelectedImage}
-                image={image}
-              />
-            </div>
-          }
-        />
-      </Routes>
-    </>
+    <div className={`flex flex-col h-full overflow-hidden`}>
+      <Stage
+        scale={modelScale}
+        handleResetState={handleResetState}
+        handleMagicErase={handleMagicErase}
+        handleImage={handleImage}
+        hasClicked={hasClicked}
+        setHasClicked={setHasClicked}
+        handleSelectedImage={handleSelectedImage}
+        image={image}
+      />
+    </div>
   );
 };
 

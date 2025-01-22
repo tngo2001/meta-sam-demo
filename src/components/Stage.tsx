@@ -15,7 +15,6 @@ import {
 } from "./helpers/Interface";
 import AppContext from "./hooks/createContext";
 import ImagePicker from "./ImagePicker";
-import LoadingModal from "./LoadingModal";
 import MobileOptionNavBar from "./MobileOptionNavBar";
 import MobileSegmentDrawer from "./MobileSegmentDrawer";
 import PointsModal from "./PointsModal";
@@ -640,11 +639,7 @@ const Stage = ({
         <>
           {image || isToolBarUpload ? (
             <div className="flex items-stretch justify-center flex-1 overflow-hidden stage">
-              {showLoadingModal ? (
-                <LoadingModal handleResetState={handleResetState} />
-              ) : (
-                <PointsModal />
-              )}
+              {showLoadingModal && <PointsModal />}
               <SegmentDrawer
                 handleResetState={handleResetState}
                 handleResetInteraction={handleResetInteraction}
