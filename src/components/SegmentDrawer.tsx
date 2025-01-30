@@ -114,23 +114,6 @@ const SegmentDrawer = ({
           <div className="flex justify-between p-2 pb-3">
             <span className="leading-3">Tools</span>
           </div>
-          {uploadClick && (
-            <div className="flex justify-between px-3 py-2 mb-3 cursor-pointer rounded-xl outline outline-gray-200">
-              <button
-                className="flex"
-                onClick={() => {
-                  setShowGallery(true);
-                  setIsCutOut(false);
-                  setIsToolBarUpload(true);
-                }}
-              >
-                <span {...getRootProps()} className="flex text-sm">
-                  <input {...getInputProps()} />
-                  Upload
-                </span>
-              </button>
-            </div>
-          )}
           <div
             onClick={() => {
               segmentTypes !== "Click" && handleResetInteraction();
@@ -270,7 +253,7 @@ const SegmentDrawer = ({
             )}
           </div>
 
-          <div
+          {/* <div
             onClick={() => {
               segmentTypes !== "Box" && handleResetInteraction(true);
               getCookieConsentValue("sa_demo") === "true" &&
@@ -406,105 +389,7 @@ const SegmentDrawer = ({
                 handleMultiMaskMode={handleMultiMaskMode}
               />
             )}
-          </div>
-
-          <div
-            onClick={() => {
-              segmentTypes !== "All" && handleResetInteraction();
-              getCookieConsentValue("sa_demo") === "true" &&
-                ReactGA.default.send({
-                  category: "event",
-                  action: "is_amg",
-                });
-              clearTimeout(allTimeout);
-              setSegmentTypes("All");
-              setIsCutOut(false);
-              setDidShowAMGAnimation(false);
-            }}
-            className={`transition-all overflow-hidden ${
-              segmentTypes === "All" &&
-              isAllAnimationDone === false &&
-              "disabled"
-            } ${
-              segmentTypes !== "All" &&
-              (isAllCollapsed ? "max-h-[40px]" : "max-h-[85px]")
-            } my-2 rounded-xl px-4 py-2 cursor-pointer ${
-              segmentTypes === "All"
-                ? "outline-blue-700 outline outline-[2.5px]"
-                : "outline outline-gray-200"
-            } ${
-              (!isModelLoaded["allModel"] || (isLoading && !isErased)) &&
-              "pointer-events-none"
-            } ${isCutOut && "hidden"}`}
-            onMouseEnter={() => {
-              clearTimeout(allTimeout);
-              allTimeout = setTimeout(() => {
-                setIsAllCollapsed(false);
-                setVisibleAllHover(true);
-                setIsAllMounted(true);
-              }, 700);
-            }}
-            onMouseLeave={() => {
-              setIsClickCollapsed(true);
-              setIsBoxCollapsed(true);
-              setIsAllCollapsed(true);
-              setIsCutOutCollapsed(true);
-              clearTimeout(allTimeout);
-              setIsClickMounted(false);
-              setIsBoxMounted(false);
-              setIsAllMounted(false);
-              setIsCutOutMounted(false);
-            }}
-          >
-            <div className="flex">
-              <Sparkle isActive={true} />
-              <span
-                className={`pl-3 font-bold ${
-                  segmentTypes === "All" && "text-blue-600"
-                } ${
-                  (!isModelLoaded["allModel"] || (isLoading && !isErased)) &&
-                  "disabled"
-                }`}
-              >
-                Everything
-              </span>
-            </div>
-            {segmentTypes !== "All" && visibleAllHover && (
-              <Animate isMounted={isAllMounted}>
-                <p
-                  className={`text-xs my-3 opacity-70 ${
-                    (!isModelLoaded["allModel"] || (isLoading && !isErased)) &&
-                    "disabled"
-                  }`}
-                >
-                  Find all the objects in the image automatically.
-                </p>
-              </Animate>
-            )}
-            {segmentTypes === "All" && (
-              <p
-                className={`text-xs my-3 opacity-70 text-blue-700 ${
-                  (!isModelLoaded["allModel"] || (isLoading && !isErased)) &&
-                  "disabled"
-                }`}
-              >
-                Find all the objects in the image automatically.
-              </p>
-            )}
-            {segmentTypes === "All" && (
-              <SegmentOptions
-                handleResetInteraction={handleResetInteraction}
-                handleUndoInteraction={handleUndoInteraction}
-                handleRedoInteraction={handleRedoInteraction}
-                handleCreateSticker={handleCreateSticker}
-                handleMagicErase={handleMagicErase}
-                handleImage={handleImage}
-                hasClicked={hasClicked}
-                isCutOut={[isCutOut, setIsCutOut]}
-                handleMultiMaskMode={handleMultiMaskMode}
-              />
-            )}
-          </div>
+          </div> */}
 
           <div
             onClick={(e) => {

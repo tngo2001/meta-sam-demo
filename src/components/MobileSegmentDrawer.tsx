@@ -123,37 +123,6 @@ const MobileSegmentDrawer = ({
         <ul className="flex w-screen mb-2 font-semi-bold justify-evenly text-secondary">
           <li>
             <a
-              className={`flex flex-col items-center pt-2 ${
-                isModelLoaded.allModel === false &&
-                "opacity-70 pointer-events-none"
-              }`}
-              onClick={() => {
-                setDidShowAMGAnimation(false);
-                superDefer(() => {
-                  if (segmentTypes !== "All") {
-                    handleResetInteraction();
-                    setSegmentTypes("All");
-                    setStickerTabBool(() => false);
-                  } else {
-                    setSegmentTypes("Click");
-                  }
-                });
-              }}
-              onMouseDown={() => setEverythingBool((prev) => !prev)}
-            >
-              <Sparkle isActive={everythingBool} />
-              <span
-                className={
-                  (!isModelLoaded.allModel ? "opacity-60" : "") +
-                  (everythingBool ? "text-blue-700" : "#000")
-                }
-              >
-                Everything
-              </span>
-            </a>
-          </li>
-          <li>
-            <a
               className="flex flex-col items-center pt-2"
               onClick={() => {
                 setStickerTabBool(() => !stickerTabBool);

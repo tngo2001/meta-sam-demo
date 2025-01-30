@@ -639,7 +639,6 @@ const Stage = ({
         <>
           {image || isToolBarUpload ? (
             <div className="flex items-stretch justify-center flex-1 overflow-hidden stage">
-              {showLoadingModal && <PointsModal />}
               <SegmentDrawer
                 handleResetState={handleResetState}
                 handleResetInteraction={handleResetInteraction}
